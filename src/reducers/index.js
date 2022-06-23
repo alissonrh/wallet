@@ -9,8 +9,8 @@ import reducerUser from './user';
 import reducerWallet from './wallet';
 
 const rootReducer = combineReducers({
-  reducerUser,
-  reducerWallet,
+  user: reducerUser,
+  wallet: reducerWallet,
 });
 
 export default rootReducer;
