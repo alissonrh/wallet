@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { SEND_CURRENCIE, SEND_EXPENSE } from '../actions';
+import { SEND_CURRENCIE, SEND_EXPENSE, REMOVE_EXPENSE } from '../actions';
 
 const INITIAL_STATE_WALLET = {
   currencies: [],
@@ -23,6 +23,11 @@ const reducerWallet = (state = INITIAL_STATE_WALLET, action) => {
           id: state.expenses.length,
         },
       ],
+    };
+  case REMOVE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.payloud),
     };
   default:
     return state;

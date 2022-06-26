@@ -4,6 +4,7 @@ import getCurrencies from '../services/api';
 export const SEND_LOGIN = 'SEND_LOGIN';
 export const SEND_CURRENCIE = 'SEND_CURRENCIE';
 export const SEND_EXPENSE = 'SEND_EXPENSE';
+export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 
 export const sendLogin = (login) => ({
   type: SEND_LOGIN,
@@ -18,6 +19,11 @@ export const sendCurrencie = (array) => ({
 export const sendExpense = (payloud) => ({
   type: SEND_EXPENSE,
   payloud,
+});
+
+export const removeExpense = (id) => ({
+  type: REMOVE_EXPENSE,
+  payloud: id,
 });
 
 export const fetchCurrencieObjThunk = (action, state) => async (dispatch) => {
