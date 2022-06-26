@@ -8,9 +8,9 @@ const INITIAL_STATE = {
   id: 0,
   value: 0,
   description: '',
-  currency: '',
-  method: '',
-  tag: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
   exchangeRates: {},
 };
 
@@ -37,6 +37,10 @@ class Form extends React.Component {
     dispatch(fetchCurrencieObjThunk(sendExpense, this.state));
     this.setState({
       value: 0,
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: '',
     });
   }
 
@@ -47,7 +51,7 @@ class Form extends React.Component {
 
   render() {
     const { currencies } = this.props;
-    const { value } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     return (
       <form
         onSubmit={ this.handleClick }
@@ -69,9 +73,10 @@ class Form extends React.Component {
             id="moeda"
             name="currency"
             onChange={ this.handleChange }
+            value={ currency }
           >
             {currencies.map((currencie) => (
-              <option value={ currencie } key={ currencie }>
+              <option key={ currencie }>
                 {currencie}
               </option>))}
           </select>
@@ -83,6 +88,7 @@ class Form extends React.Component {
             data-testid="method-input"
             name="method"
             id="method-input"
+            value={ method }
           >
             <option>Dinheiro</option>
             <option>Cartão de crédito</option>
@@ -96,6 +102,7 @@ class Form extends React.Component {
             data-testid="tag-input"
             name="tag"
             id="tag"
+            value={ tag }
           >
             <option>Alimentação</option>
             <option>Lazer</option>
@@ -112,6 +119,7 @@ class Form extends React.Component {
             type="text"
             id="descricao"
             name="description"
+            value={ description }
           />
         </label>
         <button

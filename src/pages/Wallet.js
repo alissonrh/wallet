@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Form from '../components/Form';
 import { fetchCurrencieThunk } from '../actions';
+import Table from '../components/Table';
 /* import getCurrencies from '../services/api'; */
 
 class Wallet extends React.Component {
@@ -26,6 +27,7 @@ class Wallet extends React.Component {
       <main>
         <Header />
         <Form />
+        <Table />
       </main>);
   }
 }
