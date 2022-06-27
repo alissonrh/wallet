@@ -5,6 +5,8 @@ export const SEND_LOGIN = 'SEND_LOGIN';
 export const SEND_CURRENCIE = 'SEND_CURRENCIE';
 export const SEND_EXPENSE = 'SEND_EXPENSE';
 export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const EXPENSE_EDITED = 'EXPENSE_EDITED';
 
 export const sendLogin = (login) => ({
   type: SEND_LOGIN,
@@ -16,14 +18,24 @@ export const sendCurrencie = (array) => ({
   payloud: [...array],
 });
 
-export const sendExpense = (payloud) => ({
+export const sendExpense = (expense) => ({
   type: SEND_EXPENSE,
-  payloud,
+  payloud: expense,
 });
 
 export const removeExpense = (id) => ({
   type: REMOVE_EXPENSE,
   payloud: id,
+});
+
+export const editExpense = (id) => ({
+  type: EDIT_EXPENSE,
+  payloud: id,
+});
+
+export const expenseEdited = (expense) => ({
+  type: EXPENSE_EDITED,
+  payloud: expense,
 });
 
 export const fetchCurrencieObjThunk = (action, state) => async (dispatch) => {

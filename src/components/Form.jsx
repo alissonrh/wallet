@@ -2,7 +2,7 @@ import React from 'react';
 import checkPropTypes, { string } from 'prop-types';
 import { connect } from 'react-redux';
 /* import getCurrencies from '../services/api'; */
-import { fetchCurrencieObjThunk, sendExpense } from '../actions';
+import { expenseEdited, fetchCurrencieObjThunk, sendExpense } from '../actions';
 
 const INITIAL_STATE = {
   id: 0,
@@ -31,17 +31,24 @@ class Form extends React.Component {
     });
   } */
 
+  shouldComponentUpdate(nextProps) {
+    const { editor, idParaEditar, expenseParaEditar } = nextProps;
+    const { id } = this.state;
+    if (editor && id !== idParaEditar) {
+      this.setState(expenseParaEditar);
+    }
+    return true;
+  }
+
   handleClick = (event) => {
     event.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(fetchCurrencieObjThunk(sendExpense, this.state));
-    this.setState({
-      value: 0,
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: '',
-    });
+    const { dispatch, editor } = this.props;
+    if (editor) {
+      dispatch(expenseEdited(this.state));
+    } else {
+      dispatch(fetchCurrencieObjThunk(sendExpense, this.state));
+    }
+    this.setState(INITIAL_STATE);
   }
 
   handleChange = (event) => {
@@ -50,7 +57,7 @@ class Form extends React.Component {
   }
 
   render() {
-    const { currencies } = this.props;
+    const { currencies, editor } = this.props;
     const { value, description, currency, method, tag } = this.state;
     return (
       <form
@@ -82,7 +89,7 @@ class Form extends React.Component {
           </select>
         </label>
         <label htmlFor="method-input">
-          Método de Pagamento:
+          Método de Pagamento: editando: state.wallet.e
           <select
             onChange={ this.handleChange }
             data-testid="method-input"
@@ -125,7 +132,7 @@ class Form extends React.Component {
         <button
           type="submit"
         >
-          Adicionar despesa
+          { editor ? 'Editar despesa' : 'Adicionar despesa' }
         </button>
 
       </form>
@@ -135,11 +142,23 @@ class Form extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
+  idParaEditar: state.wallet.idParaEditar,
+  expenseParaEditar: state.wallet.expenses
+    .find((e) => e.id === state.wallet.idParaEditar),
 });
 
 Form.propTypes = {
   currencies: checkPropTypes.arrayOf(string).isRequired,
   dispatch: checkPropTypes.func.isRequired,
+  editor: checkPropTypes.bool.isRequired,
+  idParaEditar: checkPropTypes.number.isRequired,
+  expenseParaEditar: checkPropTypes.shape({}),
+};
+
+Form.defaultProps = {
+  expenseParaEditar: {},
 };
 
 export default connect(mapStateToProps)(Form);
