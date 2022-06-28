@@ -6,7 +6,7 @@ const INITIAL_STATE_WALLET = {
   currencies: [],
   expenses: [],
   editor: false,
-  idParaEditar: 0,
+  idToEdit: 0,
 };
 
 const reducerWallet = (state = INITIAL_STATE_WALLET, action) => {
@@ -35,7 +35,7 @@ const reducerWallet = (state = INITIAL_STATE_WALLET, action) => {
     return {
       ...state,
       editor: true,
-      idParaEditar: action.payloud,
+      idToEdit: action.payloud,
     };
   case EXPENSE_EDITED:
     return {
@@ -45,11 +45,6 @@ const reducerWallet = (state = INITIAL_STATE_WALLET, action) => {
           return action.payloud;
         } return e;
       }),
-      /* expenses: [
-        ...state.expenses, {
-          ...action.payloud,
-        },
-      ], */
       editor: false,
     };
   default:

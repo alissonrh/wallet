@@ -38,11 +38,11 @@ export const expenseEdited = (expense) => ({
   payloud: expense,
 });
 
-export const fetchCurrencieObjThunk = (action, state) => async (dispatch) => {
+export const fetchCurrencieObjThunk = (state) => async (dispatch) => {
   const response = await getCurrencies();
   delete response.USDT;
   state.exchangeRates = response;
-  dispatch(action(state));
+  dispatch(sendExpense(state));
 };
 
 export const fetchCurrencieThunk = () => async (dispatch) => {

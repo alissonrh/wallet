@@ -2,39 +2,24 @@ import React from 'react';
 import checkPropTypes, { string } from 'prop-types';
 import { connect } from 'react-redux';
 /* import getCurrencies from '../services/api'; */
-import { expenseEdited, fetchCurrencieObjThunk, sendExpense } from '../actions';
+import { expenseEdited, fetchCurrencieObjThunk } from '../actions';
 
 const INITIAL_STATE = {
-  id: 0,
+  id: '',
   value: 0,
   description: '',
   currency: 'USD',
   method: 'Dinheiro',
   tag: 'Alimentação',
-  exchangeRates: {},
 };
 
 class Form extends React.Component {
   state = INITIAL_STATE
 
-  /* handleClick = async (event) => {
-    event.preventDefault();
-    const { dispatch } = this.props;
-    const fetchApi = await getCurrencies();
-    delete fetchApi.USDT;
-    this.setState({
-      exchangeRates: fetchApi,
-    });
-    await dispatch(sendExpense(this.state));
-    this.setState({
-      value: 0,
-    });
-  } */
-
   shouldComponentUpdate(nextProps) {
-    const { editor, idParaEditar, expenseParaEditar } = nextProps;
+    const { editor, idToEdit, expenseParaEditar } = nextProps;
     const { id } = this.state;
-    if (editor && id !== idParaEditar) {
+    if (editor && id !== idToEdit) {
       this.setState(expenseParaEditar);
     }
     return true;
@@ -46,7 +31,7 @@ class Form extends React.Component {
     if (editor) {
       dispatch(expenseEdited(this.state));
     } else {
-      dispatch(fetchCurrencieObjThunk(sendExpense, this.state));
+      dispatch(fetchCurrencieObjThunk(this.state));
     }
     this.setState(INITIAL_STATE);
   }
@@ -89,7 +74,7 @@ class Form extends React.Component {
           </select>
         </label>
         <label htmlFor="method-input">
-          Método de Pagamento: editando: state.wallet.e
+          Método de Pagamento:
           <select
             onChange={ this.handleChange }
             data-testid="method-input"
@@ -132,7 +117,7 @@ class Form extends React.Component {
         <button
           type="submit"
         >
-          { editor ? 'Editar despesa' : 'Adicionar despesa' }
+          {editor ? 'Editar despesa' : 'Adicionar despesa'}
         </button>
 
       </form>
@@ -144,16 +129,16 @@ const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
   editor: state.wallet.editor,
-  idParaEditar: state.wallet.idParaEditar,
+  idToEdit: state.wallet.idToEdit,
   expenseParaEditar: state.wallet.expenses
-    .find((e) => e.id === state.wallet.idParaEditar),
+    .find((e) => e.id === state.wallet.idToEdit),
 });
 
 Form.propTypes = {
   currencies: checkPropTypes.arrayOf(string).isRequired,
   dispatch: checkPropTypes.func.isRequired,
   editor: checkPropTypes.bool.isRequired,
-  idParaEditar: checkPropTypes.number.isRequired,
+  idToEdit: checkPropTypes.number.isRequired,
   expenseParaEditar: checkPropTypes.shape({}),
 };
 
