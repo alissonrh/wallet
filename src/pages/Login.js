@@ -44,25 +44,26 @@ class Login extends React.Component {
     return (
       <div
         className="flex h-screen
-      justify-center items-center
-       bg-slate-200"
+      justify-center items-center bg-gradient-to-br
+       from-[#e27106]"
       >
 
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div className="text-center text-laranja-itau text-3xl font-medium">
+        <form className="bg-azul-itau shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+          <div className="text-center text-amarelo-itau text-3xl font-medium">
             Pay
-            <strong className="text-azul-itau">Wallet</strong>
+            <strong className="text-amarelo-itau">Wallet</strong>
           </div>
           <div className="mb-4">
 
             <label
-              className="lock text-gray-700 text-sm font-bold mb-2"
+              className="block text-amarelo-itau text-sm font-bold mb-2"
               htmlFor="email"
             >
               Email
               <input
                 className="shadow appearance-none border mt-1.5 rounded w-full py-2 px-3
-                 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                 text-gray-700 leading-tight focus:outline-none focus:shadow-outline
+                  focus:border-2 focus:border-amarelo-itau"
                 id="username"
                 placeholder="exemplo@gmail.com"
                 type="email"
@@ -76,7 +77,7 @@ class Login extends React.Component {
           <div className="mb-6">
 
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-amarelo-itau text-sm font-bold mb-2"
               htmlFor="password"
             >
               Senha
@@ -84,7 +85,8 @@ class Login extends React.Component {
                 className="shadow appearance-none border
                 rounded w-full py-2 px-3
                   text-gray-700 mt-1.5 mb-3 leading-tight
-                  focus:outline-none focus:shadow-outline"
+                  focus:outline-none focus:shadow-outline
+                  focus:border-2 focus:border-amarelo-itau"
                 id="password"
                 type="password"
                 placeholder="******"
@@ -110,7 +112,7 @@ class Login extends React.Component {
               </button>
             ) : (
               <button
-                className="bg-azul-itau hover:bg-laranja-itau
+                className="bg-laranja-itau
                text-white font-bold py-2 px-4 rounded
                focus:outline-none w-full focus:shadow-outline"
                 type="button"

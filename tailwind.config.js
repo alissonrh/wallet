@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         'azul-itau': '#01359a',
         'laranja-itau': '#ec7000',
+        'amarelo-itau': '#ffff00',
       },
     },
   },

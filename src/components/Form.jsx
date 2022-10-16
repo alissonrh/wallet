@@ -46,11 +46,15 @@ class Form extends React.Component {
     const { value, description, currency, method, tag } = this.state;
     return (
       <form
+        className="flex"
         onSubmit={ this.handleClick }
       >
         <label htmlFor="value">
           Valor:
           <input
+            className="bg-gray-200 appearance-none border-2
+            border-gray-200 rounded w-full py-2 px-4 text-gray-700
+            leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             onChange={ this.handleChange }
             data-testid="value-input"
             type="number"
@@ -115,6 +119,9 @@ class Form extends React.Component {
           />
         </label>
         <button
+          className="bg-azul-itau hover:bg-laranja-itau
+        text-white font-bold py-2 px-4 rounded
+        focus:outline-none focus:shadow-outline"
           type="submit"
         >
           {editor ? 'Editar despesa' : 'Adicionar despesa'}

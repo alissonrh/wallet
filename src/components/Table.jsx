@@ -17,31 +17,40 @@ class Table extends React.Component {
   render() {
     const { expenses } = this.props;
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
+      <table className="w-full border">
+        <thead className="border">
+          <tr className="border">
+            <th className="border">Descrição</th>
+            <th className="border">Tag</th>
+            <th className="border">Método de pagamento</th>
+            <th className="border">Valor</th>
+            <th className="border">Moeda</th>
+            <th className="border">Câmbio utilizado</th>
+            <th className="border">Valor convertido</th>
+            <th className="border">Moeda de conversão</th>
+            <th className="border">Editar/Excluir</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-center">
           {expenses.map((e) => (
             <tr key={ e.id }>
-              <td>{e.description}</td>
-              <td>{e.tag}</td>
-              <td>{e.method}</td>
-              <td>{Number(e.value).toFixed(2)}</td>
-              <td>{(e.exchangeRates[e.currency].name).split('/')[0]}</td>
-              <td>{Number(e.exchangeRates[e.currency].ask).toFixed(2)}</td>
-              <td>{Number(e.value * e.exchangeRates[e.currency].ask).toFixed(2)}</td>
-              <td>Real</td>
+              <td className="border">{e.description}</td>
+              <td className="border">{e.tag}</td>
+              <td className="border">{e.method}</td>
+              <td className="border">{Number(e.value).toFixed(2)}</td>
+              <td className="border">
+                {(e.exchangeRates[e.currency].name).split('/')[0]}
+
+              </td>
+              <td className="border">
+                {Number(e.exchangeRates[e.currency].ask).toFixed(2)}
+
+              </td>
+              <td className="border">
+                {Number(e.value * e.exchangeRates[e.currency].ask).toFixed(2)}
+
+              </td>
+              <td className="border">Real</td>
               <td>
                 <button
                   data-testid="edit-btn"
