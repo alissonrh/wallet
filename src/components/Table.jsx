@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import checkPropTypes from 'prop-types';
 import { removeExpense, editExpense } from '../actions';
+import { BsTrash } from 'react-icons/bs'
+import { FaRegEdit } from 'react-icons/fa'
 
 class Table extends React.Component {
   handleClickDelete = (id) => {
@@ -51,20 +53,23 @@ class Table extends React.Component {
 
               </td>
               <td className="border">Real</td>
-              <td>
-                <button
+              <td className="border">
+                <button 
                   data-testid="edit-btn"
                   type="button"
                   onClick={ () => this.handleClickEdit(e.id) }
-                >
-                  Editar
-                </button>
+                  className="bg-laranja-itau hover:bg-amarelo-itau
+        text-white hover:text-black font-bold px-3 py-1.5 rounded mx-1 text-xl
+        focus:outline-none focus:shadow-outline"
+                ><FaRegEdit/></button>
                 <button
                   data-testid="delete-btn"
                   type="button"
                   onClick={ () => this.handleClickDelete(e.id) }
-                >
-                  Remover
+                  className="bg-azul-itau hover:bg-amarelo-itau 
+        text-white hover:text-black font-bold px-3 py-1.5 rounded m-0.5 text-xl
+        focus:outline-none focus:shadow-outline"
+                ><BsTrash />
                 </button>
               </td>
             </tr>
