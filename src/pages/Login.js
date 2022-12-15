@@ -10,6 +10,7 @@ class Login extends React.Component {
     email: '',
     password: '',
     isButtonDissabled: true,
+    showPassword: false,
   }
 
   isButtonEnabled = () => {
@@ -28,6 +29,16 @@ class Login extends React.Component {
     );
   }
 
+  handleVisibiliteChange = () => {
+    const { showPassword } = this.state;
+    console.log(showPassword);
+    this.setState(
+      {
+        showPassword: !showPassword,
+      },
+    );
+  }
+
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value }, this.isButtonEnabled);
@@ -40,7 +51,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password, isButtonDissabled } = this.state;
+    const { email, password, isButtonDissabled, showPassword } = this.state;
     return (
       <div
         className="flex h-screen
@@ -69,8 +80,8 @@ class Login extends React.Component {
                 type="email"
                 name="email"
                 data-testid="email-input"
-                value={ email }
-                onChange={ this.handleChange }
+                value={email}
+                onChange={this.handleChange}
               />
             </label>
           </div>
@@ -81,51 +92,46 @@ class Login extends React.Component {
               htmlFor="password"
             >
               Senha
-              <input
-                className="shadow appearance-none border
-                rounded w-full py-2 px-3
-                  text-gray-700 mt-1.5 mb-3 leading-tight
-                  focus:outline-none focus:shadow-outline
-                  focus:border-2 focus:border-amarelo-itau"
-                id="password"
-                type="password"
-                placeholder="******"
-                name="password"
-                data-testid="password-input"
-                value={ password }
-                onChange={ this.handleChange }
-              />
+              <div className="relative">
+                <input
+                  className="shadow appearance-none border
+          rounded w-full py-2 px-3
+            text-gray-700 mt-1.5 mb-3 leading-tight
+            focus:outline-none focus:shadow-outline
+            focus:border-2 focus:border-amarelo-itau"
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="******"
+                  name="password"
+                  data-testid="password-input"
+                  value={password}
+                  onChange={this.handleChange}
+                />
+                <button
+                  type="button"
+                  className="absolute top-0 bottom-0 right-0 px-3 py-1 focus:outline-none"
+                  onClick={this.handleVisibiliteChange}
+                >
+                  {showPassword ? '🙈' : '🔒'}
+                </button>
+              </div>
             </label>
             {/* <p className="text-red-500 text-xs italic">Please choose a password.</p> */}
           </div>
           <div className="flex items-center justify-between">
-            {isButtonDissabled ? (
-              <button
-                className="bg-slate-400
-               text-white font-bold py-2 px-4 rounded
-               focus:outline-none w-full focus:shadow-outline"
-                type="button"
-                disabled={ isButtonDissabled }
-                onClick={ this.handleClick }
-              >
-                Entrar
-              </button>
-            ) : (
-              <button
-                className="bg-laranja-itau
-               text-white font-bold py-2 px-4 rounded
-               focus:outline-none w-full focus:shadow-outline"
-                type="button"
-                disabled={ isButtonDissabled }
-                onClick={ this.handleClick }
-              >
-                Entrar
-              </button>
-            )}
-
+            <button
+              className={`bg-${isButtonDissabled ? 'slate-400' : 'laranja-itau'}
+    text-white font-bold py-2 px-4 rounded
+    focus:outline-none w-full focus:shadow-outline`}
+              type="button"
+              disabled={isButtonDissabled}
+              onClick={this.handleClick}
+            >
+              Entrar
+            </button>
           </div>
-        </form>
-      </div>
+        </form >
+      </div >
     );
   }
 }
